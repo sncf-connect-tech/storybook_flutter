@@ -1,0 +1,6 @@
+name: storybook_flutter_monorepo
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  melos: ^3.1.0 
