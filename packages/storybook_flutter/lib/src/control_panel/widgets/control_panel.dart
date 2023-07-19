@@ -23,18 +23,13 @@ class ControlPanel extends StatelessWidget {
     final isHorizontal = direction == Axis.horizontal;
 
     Widget buildIcon(Plugin p) => IconButton(
-          icon: Icon(p.icon, color: plugin == p ? theme.accentColor : null),
-          onPressed: () =>
-              context.read<ControlPanelProvider>().toggle(p.runtimeType),
+          icon: Icon(p.icon, color: plugin == p ? theme.colorScheme.secondary : null),
+          onPressed: () => context.read<ControlPanelProvider>().toggle(p.runtimeType),
         );
 
     final border = Border(
-      left: isHorizontal
-          ? BorderSide(color: theme.dividerColor)
-          : BorderSide.none,
-      top: isHorizontal
-          ? BorderSide.none
-          : BorderSide(color: theme.dividerColor),
+      left: isHorizontal ? BorderSide(color: theme.dividerColor) : BorderSide.none,
+      top: isHorizontal ? BorderSide.none : BorderSide(color: theme.dividerColor),
     );
 
     final pluginSettings = context.watch<PluginSettingsNotifier>();
@@ -48,15 +43,12 @@ class ControlPanel extends StatelessWidget {
           context,
           context.watch<StoryProvider>().currentStory,
           pluginSettings.get<dynamic>(plugin.runtimeType),
-          (dynamic value) => context
-              .read<PluginSettingsNotifier>()
-              .set(plugin.runtimeType, value),
+          (dynamic value) => context.read<PluginSettingsNotifier>().set(plugin.runtimeType, value),
         ),
       );
     }
 
-    final panelSize =
-        plugin != null ? _contentSize + _iconPanelSize : _iconPanelSize;
+    final panelSize = plugin != null ? _contentSize + _iconPanelSize : _iconPanelSize;
 
     return AnimatedContainer(
       key: ValueKey(direction),
@@ -78,8 +70,7 @@ class ControlPanel extends StatelessWidget {
             ),
           ),
           Align(
-            alignment:
-                isHorizontal ? Alignment.centerRight : Alignment.bottomCenter,
+            alignment: isHorizontal ? Alignment.centerRight : Alignment.bottomCenter,
             child: Material(
               color: theme.cardColor,
               child: Container(
@@ -90,10 +81,7 @@ class ControlPanel extends StatelessWidget {
                 child: Flex(
                   direction: isHorizontal ? Axis.vertical : Axis.horizontal,
                   children: [
-                    ...panel.plugins
-                        .where((p) => p.settingsBuilder != null)
-                        .map(buildIcon)
-                        .toList(),
+                    ...panel.plugins.where((p) => p.settingsBuilder != null).map(buildIcon).toList(),
                     const Spacer(),
                     const FullScreenButton(),
                     const ThemeSwitcher(),

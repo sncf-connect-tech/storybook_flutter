@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:storybook_flutter/src/control_panel/provider.dart';
 import 'package:storybook_flutter/src/knobs/knobs_plugin.dart';
@@ -30,7 +29,7 @@ typedef StoryWrapperBuilder = Widget Function(
 ///         name: 'Flat button',
 ///         child: MaterialButton(child: Text('Flat button'), onPressed: () {}),
 ///       ),
-///       Story(
+///       Story(  
 ///         name: 'Raised button',
 ///         child: RaisedButton(child: Text('Raised button'), onPressed: () {}),
 ///       ),
@@ -129,8 +128,7 @@ class Storybook extends StatelessWidget {
             localizationsDelegates: localizationDelegates,
             initialRoute: initialRoute,
             onGenerateInitialRoutes: (name) => [_generateRoute(context, name)],
-            onGenerateRoute: (settings) =>
-                _generateRoute(context, settings.name, settings: settings),
+            onGenerateRoute: (settings) => _generateRoute(context, settings.name, settings: settings),
             builder: builder,
             navigatorObservers: navigatorObservers,
           ),
